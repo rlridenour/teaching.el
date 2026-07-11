@@ -69,7 +69,7 @@ Styling (header, footer, colors, fonts) comes from the
 # #+DATE: %s
 #+OPTIONS: toc:nil
 #+OPTIONS: title:nil
-#+TYPST: #import \"@local/obu-syllabus:0.1.0\": *
+#+TYPST: #import \"@local/obu-syllabus:0.1.1\": *
 #+TYPST: #show: syllabus.with(title: \"%s\")
 #+HTML_DOCTYPE: html5
 #+OPTIONS: html-style:nil
