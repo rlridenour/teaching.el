@@ -30,14 +30,6 @@ Words of two letters or fewer, and words in
   "Return today's date formatted as \"Month Day, Year\"."
   (format-time-string "%B %-d, %Y"))
 
-(defun rlr/teaching--document-header (title)
-  "Return the standard org header block for TITLE."
-  (format "#+TITLE: %s
-#+AUTHOR: Dr. Randy Ridenour
-#+DATE: %s
-"
-          title (rlr/teaching--today)))
-
 (defun rlr/teaching--handout-template (title)
   "Return the org template string for a handout named TITLE."
   (format "#+TITLE: %s
@@ -69,8 +61,22 @@ Words of two letters or fewer, and words in
           title title (rlr/teaching--today)))
 
 (defun rlr/teaching--syllabus-template (title)
-  "Return the org template string for a syllabus named TITLE."
-  (rlr/teaching--document-header title))
+  "Return the org template string for a syllabus named TITLE.
+Styling (header, footer, colors, fonts) comes from the
+@local/obu-syllabus Typst package."
+  (format "#+TITLE: %s
+#+AUTHOR: Dr. Randy Ridenour
+# #+DATE: %s
+#+OPTIONS: toc:nil
+#+OPTIONS: title:nil
+#+TYPST: #import \"@local/obu-syllabus:0.1.0\": *
+#+TYPST: #show: syllabus.with(title: \"%s\")
+#+HTML_DOCTYPE: html5
+#+OPTIONS: html-style:nil
+#+OPTIONS: num:nil
+#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"https://randyridenour.net/css/canvas-handout.css\"/>
+"
+          title (rlr/teaching--today) title))
 
 (defun rlr/teaching--new-document (base-dir title template-fn)
   "Create a new document under BASE-DIR named after TITLE.
